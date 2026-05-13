@@ -1,6 +1,7 @@
 # 67. Fazer um algoritmo que receba um número (1 < número <= 50000 e, caso não seja, deve ser novamente solicitado) e demonstre o primeiro número primo após a ele.
 # Link Tarefa: https://forms.gle/KwLKRFiXka1T3x8fA
-
+# 40.	Receba 2 números inteiros. Verifique e mostre todos os números primos existentes entre eles. LISTA 1 
+.data
 	msg01: .asciiz"Digite um número maior do que 1 e menor ou igual que 50000: "
 	msgMenor: .asciiz"Número menor do que 1!\n"
 	msgMaior: .asciiz"Número maior do que 50000!\n"
@@ -36,14 +37,15 @@ maiorQue50k:
 	j main
 	
 acharPrimo:
-	rem $s1, $t2, $s0 # Guarda o resultado do resto, $s0 sera o i
+	rem $s1, $t2, $s0 # Guarda o resultado do resto, $s0 sera o divisor
 	beq $s1, 0, nDivisores # Pergunta se o resto é igual a 0
-	add $s0, $s0, 1 # Se não soma $s0 1 para a proxima divisão
-	bne $s0, $t2, acharPrimo # Continua o loop até que $s0 seja igual a $t2
+	add $s0, $s0, 1 # Se não soma divisor 1 para a proxima divisão
+	bne $s0, $t2, acharPrimo # Continua o loop até que divisor seja igual a $t2
 	j continuar
 nDivisores:
 	add $t7, $t7, 1 # Contador de divosores
 	add $s0, $s0, 1 # Soma $s0 1 para continuar o fluxo
+	bgt $t7, 1, naoPrimo # Inica novamente o loop se o número de divisores for maior dp que 2
 	j acharPrimo
 continuar:
 	blt $t7, 2, primo # Após finalizar o loop do 'acharPrimo' ele pergunta quantas divisões foram contadas e se é menor do que 2
